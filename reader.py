@@ -55,11 +55,12 @@ def wavreader(d):
     return dic
 
 
-def wavwriter(data):
+def wavwriter(data, d=""):
     """ Writes .wav files from a dictionary containing data.
         Saves two channel by default.
         
         data: dictionary in the format produced by 'wavreader(d)'
+        d: directory where to save data
         returns: bytelist containing .wav data """
 
     # saves all the metadata
@@ -85,5 +86,10 @@ def wavwriter(data):
         frame = b1 + b2
 
         raw += frame
+
+    # save the data if requested
+    if d != "":
+        with open(d, "wb") as f:
+            f.write(raw)
 
     return raw
